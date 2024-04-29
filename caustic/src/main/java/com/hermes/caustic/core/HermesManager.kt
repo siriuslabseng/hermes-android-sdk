@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.hermes.caustic.databinding.MainViewBinding
+import com.hermes.caustic.ui.shelters.ChangelogListShelter
 import java.lang.ref.WeakReference
 
 open class HermesManager private constructor (var activity: WeakReference<Activity>, private var widgetSlug: String, var hermesPublicKey: String, private var parentGroup: WeakReference<ConstraintLayout>) {
@@ -31,6 +33,7 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
     }
 
     private lateinit var activityMainViewBinding : MainViewBinding
+    private lateinit var changelogListShelter : ChangelogListShelter
 
     private fun setUpMainChangelogView()  {
         val inflater: LayoutInflater = LayoutInflater.from(activity.get()).context.getSystemService(
@@ -41,9 +44,9 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
         activityMainViewBinding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
             val statusBarSize = windowInsets.systemWindowInsetTop
             val navBarSize = windowInsets.systemWindowInsetBottom
-//            val param = activityMainViewBinding.topView.layoutParams as ViewGroup.MarginLayoutParams
+//            val param = activityMainViewBinding.topBanner.layoutParams as ViewGroup.MarginLayoutParams
 //            param.setMargins(0, statusBarSize,0, 0)
-//            activityMainViewBinding.topView.layoutParams = param
+            //activityMainViewBinding.topBanner.layoutParams = param
 //
 //            val bottomParam = activityMainViewBinding.attribution.layoutParams as ViewGroup.MarginLayoutParams
 //            bottomParam.setMargins(0, 0,0, navBarSize + 40)
@@ -59,11 +62,17 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
     }
 
     private fun createAllShelters(){
-
+        changelogListShelter = ChangelogListShelter(this, activityMainViewBinding.changelogList)
     }
 
     private fun setOnClickListeners(){
+        activityMainViewBinding.closeButton.setOnClickListener {
+            hideChangelogView()
+        }
+    }
 
+    private fun hideChangelogView(){
+        activityMainViewBinding.root.visibility = View.GONE
     }
 
     fun handleBackStack(){

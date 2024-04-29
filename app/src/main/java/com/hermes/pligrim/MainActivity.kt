@@ -3,7 +3,6 @@ package com.hermes.pligrim
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,18 +20,11 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.sample_pay_button)
         val main = findViewById<ConstraintLayout>(R.id.main)
 
-
-        // initialise the Hermes Android SDK aka Wraith
+        // initialise the Hermes Android SDK aka Caustic
         val hermesManager = HermesManager.getInstance(this, "293bb9a0-dc25-428d-8f63-d828b9420cd5","2e43173e-3e69-4fa2-8168-f4fedbf9a962", main)
 
         // show the SDK when you want to make a purchase
         button.setOnClickListener {
-            // set up payment values
-//            hermesManager.paymentAmount = amount.text.toString().toDouble()
-//            hermesManager.customerEmail = email.text.toString()
-//            hermesManager.customerName = customer.text.toString()
-//            hermesManager.logo = R.drawable.bolt_logo
-//            hermesManager.showPaymentView()
             hermesManager.showChangelogView()
         }
 
