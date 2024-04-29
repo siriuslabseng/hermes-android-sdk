@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hermes Widget</string>
+    <string name="show_changelog">Show changelog</string>
 </resources>

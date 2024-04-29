@@ -1,4 +1,4 @@
-package com.hermes.widget
+package com.hermes.pligrim
 
 import org.junit.Test
 
