@@ -2,15 +2,28 @@ package com.hermes.caustic.core
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.customview.widget.ViewDragHelper.Callback
+import com.hermes.caustic.core.api.models.FetchChangelogResponse
+import com.hermes.caustic.core.managers.NetworkManager
 import com.hermes.caustic.databinding.MainViewBinding
 import com.hermes.caustic.ui.shelters.ChangelogListShelter
+import com.hermes.caustic.ui.shelters.LoadingViewShelter
+import retrofit2.Call
+import retrofit2.Response
 import java.lang.ref.WeakReference
 
-open class HermesManager private constructor (var activity: WeakReference<Activity>, private var widgetSlug: String, var hermesPublicKey: String, private var parentGroup: WeakReference<ConstraintLayout>) {
+open class HermesManager private constructor (private var activity: WeakReference<Activity>, private var widgetSlug: String, private var hermesPublicKey: String, private var parentGroup: WeakReference<ConstraintLayout>) {
+
+    private var networkManager = NetworkManager()
+
+    private lateinit var activityMainViewBinding : MainViewBinding
+    private lateinit var changelogListShelter : ChangelogListShelter
+    private lateinit var loadingViewShelter: LoadingViewShelter
 
     companion object {
         @Volatile
@@ -30,10 +43,10 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
         setUpMainChangelogView()
         createAllShelters()
         setOnClickListeners()
+
     }
 
-    private lateinit var activityMainViewBinding : MainViewBinding
-    private lateinit var changelogListShelter : ChangelogListShelter
+
 
     private fun setUpMainChangelogView()  {
         val inflater: LayoutInflater = LayoutInflater.from(activity.get()).context.getSystemService(
@@ -59,10 +72,12 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
         }
 
         parentGroup.get()?.addView(activityMainViewBinding.root)
+
     }
 
     private fun createAllShelters(){
         changelogListShelter = ChangelogListShelter(this, activityMainViewBinding.changelogList)
+        loadingViewShelter = LoadingViewShelter(this, activityMainViewBinding.loadingView)
     }
 
     private fun setOnClickListeners(){
@@ -81,6 +96,36 @@ open class HermesManager private constructor (var activity: WeakReference<Activi
 
     fun showChangelogView(){
         activityMainViewBinding.root.visibility = View.VISIBLE
+        fetchChangelogs()
+    }
+
+    private fun showLoader(){
+        loadingViewShelter.showShelter()
+    }
+
+    private fun hideLoader(){
+        loadingViewShelter.hideShelter()
+    }
+
+    private fun fetchChangelogs(){
+        networkManager.fetchChangelogs(hermesPublicKey, widgetSlug).enqueue(object :
+            retrofit2.Callback<FetchChangelogResponse> {
+            override fun onResponse(call: Call<FetchChangelogResponse>, response: Response<FetchChangelogResponse>) {
+                if (response.isSuccessful) {
+                    // Handle the retrieved post data
+                    val post = response.body()
+                    println(post)
+                    hideLoader()
+                } else {
+                    // Handle error
+                    hideLoader()
+                }
+            }
+            override fun onFailure(call: Call<FetchChangelogResponse>, t: Throwable) {
+                // Handle failure
+                hideLoader()
+            }
+        })
     }
 
 }
