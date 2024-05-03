@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.lang.ref.WeakReference
 
-open class HermesManager private constructor (private var activity: WeakReference<Activity>, private var widgetSlug: String, private var hermesPublicKey: String, private var parentGroup: WeakReference<ConstraintLayout>) {
+open class HermesManager private constructor ( var activity: WeakReference<Activity>, private var widgetSlug: String, private var hermesPublicKey: String, private var parentGroup: WeakReference<ConstraintLayout>) {
 
     private var networkManager = NetworkManager()
 
@@ -99,6 +99,8 @@ open class HermesManager private constructor (private var activity: WeakReferenc
         fetchChangelogs()
     }
 
+
+
     private fun showLoader(){
         loadingViewShelter.showShelter()
     }
@@ -114,7 +116,11 @@ open class HermesManager private constructor (private var activity: WeakReferenc
                 if (response.isSuccessful) {
                     // Handle the retrieved post data
                     val post = response.body()
-                    println(post)
+                     post?.data?.let {
+
+                         changelogListShelter.setData(it.changelogs)
+                         changelogListShelter.showShelter()
+                    }
                     hideLoader()
                 } else {
                     // Handle error
