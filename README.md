@@ -98,5 +98,5 @@ git clone https://github.com/siriuslabseng/hermes-android-sdk
 
 ## ❤️ Acknowledgments
 
-- [PinView](https://github.com/ChaosLeung/PinView) is used to provide the otp and pin textfields.
+- [Markwon](https://noties.io/Markwon/#supported-markdown-features) is used to parse markdown.
 - [Retrofit](https://github.com/square/retrofit) is used for network request management.
