@@ -1,6 +1,8 @@
 # Caustic: Hermes Android SDK
 Hermes Widget for Android
 
+The Hermes Android SDK allows you display your changelogs easily in your android app. Get started here - [Hermes](https://tryhermes.app) 
+
 [![Platform](/platform.svg)]()
 [![JitPack](https://jitpack.io/v/kudi-inc/nomba-android-sdk.svg)](https://jitpack.io/#kudi-inc/nomba-android-sdk)
 <br><br>
@@ -42,7 +44,8 @@ Initialise it as early as you can passing the activity that would display the Ch
 and the main ViewGroup which would house the HermesManager UI. The ViewGroup should be a constraintLayout or extend from it.
 
 ```
-val hermesManager = HermesManager.getInstance(activity, "widgetslug",  "hermes-public-key", viewGroup)
+val hermesManager = HermesManager.getInstance(activity, "widgetslug", 
+"hermes-public-key", viewGroup)
 ```
 
 NombaManager handles it's own back stack, managing views and UI when it's presented and the back button or back gesture is
