@@ -4,7 +4,7 @@ Hermes Widget for Android
 The Hermes Android SDK allows you display your changelogs easily in your android app. Get started here - [Hermes](https://tryhermes.app) 
 
 [![Platform](/platform.svg)]()
-[![JitPack](https://jitpack.io/v/kudi-inc/nomba-android-sdk.svg)](https://jitpack.io/#kudi-inc/nomba-android-sdk)
+[![](https://jitpack.io/v/siriuslabseng/hermes-android-sdk.svg)](https://jitpack.io/#siriuslabseng/hermes-android-sdk)
 <br><br>
 
 <p float="left">
