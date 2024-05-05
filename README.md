@@ -31,7 +31,7 @@ dependencyResolutionManagement {
 Add to your project build.gradle file, the Nomba Android SDK
 
 ```
-implementation("com.github.siriuslabs:hermes-android-sdk:v1.0.0")
+implementation("com.github.siriuslabseng:hermes-android-sdk:v1.0.0")
 ```
 <br>
 
