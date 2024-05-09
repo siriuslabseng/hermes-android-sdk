@@ -37,12 +37,7 @@ class MainActivity : AppCompatActivity() {
                     hermesManager.handleBackStack()
                 }
             }
-
-
         onBackPressedDispatcher.addCallback(callback)
     }
-
-
-
 
 }
