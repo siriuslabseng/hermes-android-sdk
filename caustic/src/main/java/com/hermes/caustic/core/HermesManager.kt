@@ -90,6 +90,10 @@ open class HermesManager private constructor ( var activity: WeakReference<Activ
         activityMainViewBinding.root.visibility = View.GONE
     }
 
+    fun changeReactions(){
+        
+    }
+
     fun handleBackStack(){
         hideChangelogView()
     }
