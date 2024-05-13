@@ -91,7 +91,7 @@ open class HermesManager private constructor ( var activity: WeakReference<Activ
     }
 
     fun changeReactions(){
-        
+
     }
 
     fun handleBackStack(){
