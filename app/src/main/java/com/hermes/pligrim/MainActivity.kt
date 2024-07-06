@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         val main = findViewById<ConstraintLayout>(R.id.main)
 
         // initialise the Hermes Android SDK aka Caustic
-        val hermesManager = HermesManager.getInstance(this, "xWPjCAIn0jooo9YHzTLS2","01GNW0P9JJNZD3N7YAJK5HBSVA", main)
+//        val hermesManager = HermesManager.getInstance(this, "xWPjCAIn0jooo9YHzTLS2","01GNW0P9JJNZD3N7YAJK5HBSVA", main)
+        val hermesManager = HermesManager.getInstance(this, "QQA3GReFKy5sVZXODC68U","01GNW0P9JJNZD3N7YAJK5HBSVA", main)
 
         // show the SDK when you want to make a purchase
         button.setOnClickListener {
